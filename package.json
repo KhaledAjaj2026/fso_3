@@ -6,6 +6,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "nodemon index",
+		"dev:json": "json-server --port 3001 --watch db.json",
 		"build:ui": "rm -rf dist && cd ../notes-frontend/ && npm run build && cp -r dist ../notes-backend",
 		"deploy": "fly deploy",
 		"deploy:full": "npm run build:ui && npm run deploy",
@@ -19,7 +20,10 @@
 	},
 	"dependencies": {
 		"cors": "^2.8.5",
+		"dotenv": "^16.3.1",
 		"express": "^4.18.2",
+		"mongodb": "^6.3.0",
+		"mongoose": "^8.0.3",
 		"morgan": "^1.10.0"
 	}
 }
