@@ -78,7 +78,7 @@ app.put('/api/persons/:id', (req, res, next) => {
 // Delete person
 app.delete('/api/persons/:id', (req, res, next) => {
 	Person.findByIdAndDelete(req.params.id)
-		.then((result) => {
+		.then(() => {
 			res.sendStatus(204);
 		})
 		.catch((err) => next(err));
@@ -91,13 +91,11 @@ app.get('/*', (req, res) => {
 
 // Error Handler
 const errorHandler = (err, req, res, next) => {
-	console.error(err.message);
-
 	if (err.name === 'CastError') {
 		return res.status(400).send({ error: 'malformatted id' });
 	} else if (err.name === 'ValidationError') {
 		return res.status(400).send({ error: err.message });
-	} else {
+	} else if (err.name === 'AxiosError') {
 		return res.status(400).send({ error: err.message });
 	}
 
